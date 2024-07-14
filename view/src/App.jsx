@@ -9,10 +9,11 @@ function App() {
   return (
     <>
       <Container className="pt-24">
-        <Button variant="contained" startIcon={<AddIcon />}>
+        <Button variant="contained" size="large" startIcon={<AddIcon />}>
           Create Task
         </Button>
-        <TaskCard />
+        <TaskCard task="Complete Homework" description="Before Tomorrow" />
+        <TaskCard task="Complete Homework" description="Before Tomorrow" />
       </Container>
     </>
   );
