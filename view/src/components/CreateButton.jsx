@@ -27,7 +27,7 @@ function CreateButton() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="">
+    <>
       <Button
         variant="contained"
         size="large"
@@ -65,7 +65,7 @@ function CreateButton() {
           </Stack>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 
