@@ -13,10 +13,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 function TaskCard({ task, description }) {
   const [isChecked, setIsChecked] = React.useState(false);
 
-  useEffect(() => {
-    console.log(isChecked);
-  }, [isChecked]);
-
   return (
     <Card variant="outlined" className="my-5">
       <CardContent>

@@ -1,17 +1,15 @@
-import { Container, Button } from "@mui/material";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Container, Typography } from "@mui/material";
+import CreateButton from "./components/CreateButton";
 import TaskCard from "./components/TaskCard";
 
 function App() {
   return (
     <>
-      <Container className="pt-24">
-        <Button variant="contained" size="large" startIcon={<AddIcon />}>
-          Create Task
-        </Button>
+      <Container>
+        <Typography variant="h3" className="py-16">
+          Good Morning, <strong>Dusk</strong>!
+        </Typography>
+        <CreateButton />
         <TaskCard task="Complete Homework" description="Before Tomorrow" />
         <TaskCard task="Complete Homework" description="Before Tomorrow" />
       </Container>
