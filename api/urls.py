@@ -20,5 +20,10 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello', views.say_hello)
+    # path('hello', views.say_hello)
+    path('register', views.register_account_endpoint),
+    path('login', views.login_account_endpoint),
+    path('insert_task', views.insert_task_endpoint),
+    path('get_task', views.get_task_endpoint),
+    path('delete_task', views.delete_task_endpoint)
 ]
