@@ -30,13 +30,13 @@ function LoginPage() {
     setOpen(true);
     if (response.data.success) {
       localStorage.setItem("username", username);
-      window.location.href = "/dashboard";
+      setInterval(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
     }
   };
 
-  const handleClose = (event, reason) => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
 
   return (
     <Container className="h-[100vh] flex place-content-center" maxWidth="sm">

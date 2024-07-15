@@ -10,8 +10,33 @@ import {
   Snackbar,
   Link,
 } from "@mui/material";
+import instance from "../../instance";
 
 function RegisterPage() {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [message, setMessage] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      setOpen(true);
+      return;
+    }
+    const response = await instance.get("/register", {
+      params: {
+        username: username,
+        password: password,
+      },
+    });
+    setMessage(response.data.message);
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
   return (
     <Container className="h-[100vh] flex place-content-center" maxWidth="sm">
       <Card>
@@ -23,30 +48,35 @@ function RegisterPage() {
             <TextField
               label="Username"
               variant="outlined"
-              // onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               label="Password"
               variant="outlined"
-              // onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <TextField
               label="Confirm Password"
               variant="outlined"
-              // onChange={(e) => setPassword(e.target.value)}
+              value={confirmPassword}
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <Button variant="contained">Register</Button>
+            <Button variant="contained" onClick={handleSubmit}>
+              Register
+            </Button>
             <p>
               Have an account? <Link href="/">Login</Link>
             </p>
           </Stack>
           <Snackbar
-            // open={snackOpen}
+            open={open}
             autoHideDuration={6000}
-            // onClose={() => {
-            //   setSnackOpen(false);
-            // }}
-            // message={snackMessage}
+            onClose={handleClose}
+            message={message}
           />
         </CardContent>
       </Card>
