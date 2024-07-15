@@ -8,6 +8,7 @@ import {
   Button,
   Stack,
   Snackbar,
+  Link,
 } from "@mui/material";
 
 function RegisterPage() {
@@ -35,6 +36,9 @@ function RegisterPage() {
               // onChange={(e) => setPassword(e.target.value)}
             />
             <Button variant="contained">Register</Button>
+            <p>
+              Have an account? <Link href="/">Login</Link>
+            </p>
           </Stack>
           <Snackbar
             // open={snackOpen}
