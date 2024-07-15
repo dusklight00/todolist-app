@@ -9,9 +9,21 @@ import {
   Divider,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import instance from "../../instance";
 
-function TaskCard({ task, description }) {
+function TaskCard({ task, description, task_id, fetchTasks }) {
   const [isChecked, setIsChecked] = React.useState(false);
+
+  const handleDelete = async () => {
+    const username = localStorage.getItem("username");
+    const response = await instance.get("/delete_task", {
+      params: {
+        username: username,
+        task_id: task_id,
+      },
+    });
+    fetchTasks();
+  };
 
   return (
     <Card variant="outlined" className="my-5">
@@ -46,7 +58,7 @@ function TaskCard({ task, description }) {
             )}
           </div>
           <div>
-            <IconButton size="large">
+            <IconButton size="large" onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </div>

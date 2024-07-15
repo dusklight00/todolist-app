@@ -6,8 +6,10 @@ import {
   Typography,
   TextField,
   Stack,
+  Snackbar,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import instance from "../../instance";
 
 const style = {
   position: "absolute",
@@ -21,10 +23,31 @@ const style = {
   p: 4,
 };
 
-function CreateButton() {
+function CreateButton({ fetchTasks }) {
+  const [task, setTask] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [message, setMessage] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleSubmit = async () => {
+    const username = localStorage.getItem("username");
+    const response = await instance.get("/insert_task", {
+      params: {
+        username: username,
+        task_name: task,
+        description: description,
+      },
+    });
+    setMessage(response.data.message);
+    setOpenSnackbar(true);
+    handleClose();
+    fetchTasks();
+  };
+
+  const handleCloseSnackbar = () => setOpenSnackbar(false);
 
   return (
     <>
@@ -51,20 +74,28 @@ function CreateButton() {
               label="What do you want to do?"
               variant="outlined"
               fullWidth
-              // onChange={(e) => setUsername(e.target.value)}
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
             />
             <TextField
               label="Description"
               variant="outlined"
               fullWidth
-              // onChange={(e) => setUsername(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" onClick={handleSubmit}>
               Create Task
             </Button>
           </Stack>
         </Box>
       </Modal>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={message}
+      />
     </>
   );
 }

@@ -36,6 +36,13 @@ function LoginPage() {
     }
   };
 
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (username) {
+      window.location.href = "/dashboard";
+    }
+  }, []);
+
   const handleClose = () => setOpen(false);
 
   return (

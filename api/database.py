@@ -25,13 +25,14 @@ def login_user(username, password):
         return True
     return False
 
-def create_task(username, task_name):
+def create_task(username, task_name, description):
     if not collection.find_one({"username": username}):
         return False
     task_count = collection.find_one({"username": username})["task_count"]
     task = {
         "id": task_count,
         "task_name": task_name,
+        "description": description
     }
     collection.update_one({"username": username}, {"$push": {"tasks": task}})
     collection.update_one({"username": username}, {"$inc": {"task_count": 1}})
@@ -48,5 +49,5 @@ def delete_task(username, task_id):
     collection.update_one({"username": username}, {"$pull": {"tasks": {"id": task_id}}})
     return True
 
-# create_task("dusklight00", "test")
+# create_task("dusklight00", "test", "test")
 # delete_task("dusklight00", "1")

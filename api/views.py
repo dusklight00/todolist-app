@@ -37,7 +37,8 @@ def login_account_endpoint(request):
 def insert_task_endpoint(request):
     username = request.GET['username']
     task_name = request.GET['task_name']
-    if create_task(username, task_name):
+    description = request.GET['description']
+    if create_task(username, task_name, description):
         return Response({
             "success": True,
             "message": "Task created successfully"
