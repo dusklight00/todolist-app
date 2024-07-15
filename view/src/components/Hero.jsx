@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
+import Greetings from "./Greetings";
 
 function Hero() {
   const [username, setUsername] = React.useState("");
@@ -11,7 +12,7 @@ function Hero() {
 
   return (
     <Typography variant="h3" className="py-16">
-      Good Morning, <strong>{username}</strong>!
+      <Greetings /> <strong>{username}</strong>!
     </Typography>
   );
 }
