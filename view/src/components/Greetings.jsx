@@ -9,7 +9,7 @@ function Greetings() {
   else if (hours >= 12 && hours <= 17) greet = "Afternoon";
   else if (hours >= 17 && hours <= 24) greet = "Evening";
 
-  return <span>Good {greet},</span>;
+  return <span>Great {greet},</span>;
 }
 
 export default Greetings;
